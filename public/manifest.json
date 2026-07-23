@@ -1,7 +1,7 @@
 {
   "name": ".md Viewer",
   "short_name": ".md-viewer",
-  "start_url": "/",
+  "start_url": "/md-viewer",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
