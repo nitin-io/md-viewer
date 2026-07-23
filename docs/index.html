@@ -6,14 +6,22 @@
     <link rel="manifest" href="manifest.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Markdown Viewer</title>
-    <script type="module" crossorigin src="/md-viewer/assets/index-DWfzLkh2.js"></script>
-    <link rel="stylesheet" crossorigin href="/md-viewer/assets/index-x1XGuNl0.css">
+    <script type="module" crossorigin src="/md-viewer/assets/index-BtfGM_Oh.js"></script>
+    <link rel="stylesheet" crossorigin href="/md-viewer/assets/index-LkI7gtoN.css">
   </head>
   <body>
+    <div class="grid-bg"></div>
     <div id="app">
-      <button id="openFileButton">Open Markdown File</button>
+      <div class="main-menu" id="mainMenu">
+        <button id="openFileButton" class="iphone-glass-btn">
+          Open Markdown File
+        </button>
+      </div>
       <div id="markdownContent"></div>
       <input type="file" id="fileInput" accept=".md" hidden />
     </div>
+    <footer>
+      <p class="version">.md Viewer <span></span></p>
+    </footer>
   </body>
 </html>

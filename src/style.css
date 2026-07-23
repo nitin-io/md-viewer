@@ -1,0 +1,238 @@
+/* ============================================
+   Design Tokens
+   ============================================ */
+:root {
+  /* Page */
+  --color-page-bg: #ffffff;
+  --color-dot: rgba(0, 0, 0, 0.15);
+  --color-text: #000000;
+  --color-muted: #888888;
+
+  /* Glass button */
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-bg-hover: rgba(255, 255, 255, 0.72);
+  --glass-bg-active: rgba(255, 255, 255, 0.8);
+  --glass-text: #000000;
+  --glass-highlight: rgba(255, 255, 255, 0.9);
+  --glass-highlight-soft: rgba(255, 255, 255, 0.25);
+  --glass-shadow: rgba(0, 0, 0, 0.25);
+  --glass-shadow-strong: rgba(0, 0, 0, 0.3);
+  --glass-text-shadow: rgba(255, 255, 255, 0.4);
+  --glass-focus-ring: rgba(0, 0, 0, 0.6);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-page-bg: #000000;
+    --color-dot: rgba(255, 255, 255, 0.15);
+    --color-text: #ffffff;
+
+    --glass-bg: rgba(0, 0, 0, 0.4);
+    --glass-bg-hover: rgba(0, 0, 0, 0.5);
+    --glass-bg-active: rgba(0, 0, 0, 0.6);
+    --glass-text: #ffffff;
+    --glass-highlight: rgba(255, 255, 255, 0.5);
+    --glass-highlight-soft: rgba(255, 255, 255, 0.15);
+    --glass-shadow: rgba(0, 0, 0, 0.45);
+    --glass-shadow-strong: rgba(0, 0, 0, 0.55);
+    --glass-text-shadow: rgba(0, 0, 0, 0.4);
+    --glass-focus-ring: rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* Manual override, takes priority over prefers-color-scheme.
+   Toggle by setting data-theme="light" / "dark" on <html>. */
+:root[data-theme='light'] {
+  --color-page-bg: #ffffff;
+  --color-dot: rgba(0, 0, 0, 0.15);
+  --color-text: #000000;
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-bg-hover: rgba(255, 255, 255, 0.72);
+  --glass-bg-active: rgba(255, 255, 255, 0.8);
+  --glass-text: #000000;
+  --glass-highlight: rgba(255, 255, 255, 0.9);
+  --glass-highlight-soft: rgba(255, 255, 255, 0.25);
+  --glass-shadow: rgba(0, 0, 0, 0.25);
+  --glass-shadow-strong: rgba(0, 0, 0, 0.3);
+  --glass-text-shadow: rgba(255, 255, 255, 0.4);
+  --glass-focus-ring: rgba(0, 0, 0, 0.6);
+}
+
+:root[data-theme='dark'] {
+  --color-page-bg: #000000;
+  --color-dot: rgba(255, 255, 255, 0.15);
+  --color-text: #ffffff;
+  --glass-bg: rgba(0, 0, 0, 0.4);
+  --glass-bg-hover: rgba(0, 0, 0, 0.5);
+  --glass-bg-active: rgba(0, 0, 0, 0.6);
+  --glass-text: #ffffff;
+  --glass-highlight: rgba(255, 255, 255, 0.5);
+  --glass-highlight-soft: rgba(255, 255, 255, 0.15);
+  --glass-shadow: rgba(0, 0, 0, 0.45);
+  --glass-shadow-strong: rgba(0, 0, 0, 0.55);
+  --glass-text-shadow: rgba(0, 0, 0, 0.4);
+  --glass-focus-ring: rgba(255, 255, 255, 0.8);
+}
+
+/* ============================================
+   Base
+   ============================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+  color: var(--color-text);
+  background-color: var(--color-page-bg);
+}
+
+/* ============================================
+   Layout
+   ============================================ */
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background-image: radial-gradient(var(--color-dot) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.main-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.recent-files {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.version {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+#markdownContent {
+  width: 90%;
+  margin: auto;
+}
+
+/* ============================================
+   Liquid Glass Button
+   ============================================ */
+.iphone-glass-btn {
+  position: relative;
+  isolation: isolate;
+
+  padding: 14px 32px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--glass-text);
+  text-shadow: 0 1px 1px var(--glass-text-shadow);
+
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+
+  /* Outer drop shadow + inset highlight (top) + inset shade (bottom)
+     is what reads as "glass" rather than "frosted rectangle". */
+  box-shadow:
+    0 8px 24px var(--glass-shadow),
+    0 1px 1px rgba(0, 0, 0, 0.08),
+    inset 0 1px 1px var(--glass-highlight),
+    inset 0 -1px 1px var(--glass-highlight-soft),
+    inset 0 0 0 1px var(--glass-highlight-soft);
+
+  transition:
+    transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1),
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+/* Specular rim: brightens top edge, fades toward the bottom,
+   so light appears to skim across the glass surface. */
+.iphone-glass-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  padding: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+
+  background: linear-gradient(
+    165deg,
+    var(--glass-highlight) 0%,
+    var(--glass-highlight-soft) 12%,
+    transparent 30%,
+    transparent 45%,
+    var(--glass-highlight-soft) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* Ambient glow, as if light is passing through the material. */
+.iphone-glass-btn::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+
+  background: radial-gradient(
+    ellipse at 50% -20%,
+    var(--glass-highlight-soft),
+    transparent 60%
+  );
+}
+
+.iphone-glass-btn:hover {
+  background: var(--glass-bg-hover);
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 32px var(--glass-shadow-strong),
+    0 2px 2px rgba(0, 0, 0, 0.1),
+    inset 0 1px 1px var(--glass-highlight),
+    inset 0 -1px 1px var(--glass-highlight-soft),
+    inset 0 0 0 1px var(--glass-highlight-soft);
+}
+
+.iphone-glass-btn:active {
+  background: var(--glass-bg-active);
+  transform: translateY(1px) scale(0.98);
+  box-shadow:
+    0 4px 12px var(--glass-shadow),
+    inset 0 1px 2px rgba(0, 0, 0, 0.12),
+    inset 0 0 0 1px var(--glass-highlight-soft);
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.1s ease;
+}
+
+.iphone-glass-btn:focus-visible {
+  outline: 2px solid var(--glass-focus-ring);
+  outline-offset: 3px;
+}

@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import pkg from './package.json'
 
 export default defineConfig({
   build: {
@@ -6,4 +7,7 @@ export default defineConfig({
     emptyOutDir: true,
   },
   base: '/md-viewer/',
+  define: {
+    __APP_VERSION__: JSON.stringify(pkg.version),
+  }
 })
